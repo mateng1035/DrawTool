@@ -27,7 +27,13 @@ namespace WpfApplication11
             path.StrokeThickness = 1;
             path.Stroke = Brushes.White;
             SetTranslate(path);
+            path.MouseLeftButtonDown += path_MouseLeftButtonDown;
             return path;
+        }
+
+        protected virtual void path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
 
         public List<Point> Points = new List<Point>();
@@ -40,6 +46,13 @@ namespace WpfApplication11
         }
 
         public virtual void MouseMove(object sender, Point point)
+        {
+
+        }
+        public virtual void MouseLeftButtonUp(object sender, Point point)
+        {
+        }
+        public virtual void MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
 
         }

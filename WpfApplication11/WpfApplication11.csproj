@@ -78,6 +78,7 @@
     <Compile Include="DrawBase\DrawEllipse.cs" />
     <Compile Include="DrawBase\DrawLine.cs" />
     <Compile Include="DrawBase\DrawRectangle.cs" />
+    <Compile Include="DrawBase\DrawSelected.cs" />
     <Compile Include="imagemodel.cs" />
     <Compile Include="MyCapture.cs" />
     <Compile Include="TranslateEvent.cs" />
@@ -136,9 +137,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Resource\Images\yidong.png" />
     <Resource Include="Resource\Images\tuodong.png" />
     <Resource Include="Resource\Images\fuwei.png" />
     <Resource Include="Resource\Images\zhantie.png" />

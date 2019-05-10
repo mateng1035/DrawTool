@@ -57,7 +57,7 @@ namespace WpfApplication11
             TranslateTransform temp = _cap.GetTranslate();
             Point p = e.GetPosition(this.cmain);
 
-            Console.WriteLine((p.X - cx) / scaleLevel);
+            //Console.WriteLine((p.X - cx) / scaleLevel);
             p.X = (p.X - cx) / scaleLevel + cx;
 
             p.Y = (p.Y - cy) / scaleLevel + cy;
@@ -71,7 +71,23 @@ namespace WpfApplication11
         public void DefaultCursor()
         {
             this.cmain.Cursor = Cursors.Cross;
+
+            UnSelected();
+
             _slate.Reset();
+        }
+
+        private void UnSelected()
+        {
+            for (int i = 2; i < this.cmain.Children.Count - 1; i++)
+            {
+                var temp = this.cmain.Children[i];
+                Path path = temp as Path;
+                if (path != null)
+                {
+                    path.Stroke = Brushes.White;
+                }
+            }
         }
         private void cmain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -90,8 +106,17 @@ namespace WpfApplication11
 
         private void cmain_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Point p = GetPoint(e); //e.GetPosition(this.cmain);
-            _slate.MouseLeftButtonUp(sender, e.GetPosition(this.cmain));
+
+            if (_drawBase != null)
+            {
+                Point p = GetPoint(e); //e.GetPosition(this.cmain);
+                _drawBase.MouseLeftButtonUp(sender, p);
+            }
+            else
+            {
+                Point p = GetPoint(e); //e.GetPosition(this.cmain);
+                _slate.MouseLeftButtonUp(sender, e.GetPosition(this.cmain));
+            }
         }
 
         private void cmain_MouseMove(object sender, MouseEventArgs e)
@@ -188,6 +213,7 @@ namespace WpfApplication11
         {
             _drawBase = null;
             this.cmain.Cursor = Cursors.Hand;
+            UnSelected();
             _slate.Start();
         }
 
@@ -198,16 +224,21 @@ namespace WpfApplication11
         private void cmain_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             Point scaleCenter = GetPoint(e);// e.GetPosition(this.cmain);
+            double level = scaleLevel;
             if (e.Delta > 0)
             {
-                scaleLevel *= 1.08;
+                level *= 1.08;
             }
             else
             {
-                scaleLevel /= 1.08;
+                level /= 1.08;
             }
-
-            bscale.Content = scaleLevel;
+            if (level < 0.3)
+            {
+                return;
+            }
+            scaleLevel = level;
+            bscale.Content = string.Format("放大倍数 {0}倍", scaleLevel);
 
             ScaleTransform totalScale = new ScaleTransform();
             totalScale.ScaleX = scaleLevel;
@@ -283,6 +314,23 @@ namespace WpfApplication11
         {
             Point p = GetPoint(e); //e.GetPosition(this.cmain);
             _slate.MouseLeftButtonUp(sender, e.GetPosition(this.cmain));
+        }
+
+        private void Move_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            _drawBase = new DrawSelected(_cap);
+            _drawBase.CMain = this.cmain;
+            DefaultCursor();
+            this.bstatus.Content = "当前工具: 移动";
+        }
+
+        private void cmain_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_drawBase != null)
+            {
+                _drawBase.MouseRightButtonUp(sender, e);
+                UnSelected();
+            }
         }
     }
 }

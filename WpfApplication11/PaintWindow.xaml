@@ -41,6 +41,8 @@
                             </dxb:BarButtonItem>
                             <dxb:BarButtonItem Glyph="Resource/Images/tuodong.png" ItemClick="Drag_ItemClick">
                             </dxb:BarButtonItem>
+                            <dxb:BarButtonItem Glyph="Resource/Images/yidong.png" ItemClick="Move_ItemClick">
+                            </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                         <dxr:RibbonPageGroup Caption="绘制">
                             <dxb:BarButtonItem Glyph="Resource/Images/line.png" ItemClick="Line_ItemClick">
@@ -84,6 +86,9 @@
                     <dxb:BarStaticItem x:Name="btran" ShowBorder="False" />
                     <dxb:BarStaticItem x:Name="bscale" ShowBorder="False" />
                     <dxb:BarStaticItem x:Name="btext" ShowBorder="False"/>
+                    <dxb:BarCheckItem Content="捕捉：开"/>
+                    <dxb:BarCheckItem Content="正交：开"/>
+                    
                     <!--<dxb:BarStaticItem Content="Column:" ShowBorder="False"/>
                     <dxb:BarStaticItem Content="1"/>-->
                 </dxr:RibbonStatusBarControl.LeftItems>
@@ -94,7 +99,7 @@
                 </dxr:RibbonStatusBarControl.RightItemLinks>
             </dxr:RibbonStatusBarControl>
             <Grid Margin="0,0,0,0" Panel.ZIndex="-1">
-                <Canvas Background="Black" Cursor="Cross" Name="cmain" MouseLeftButtonDown="cmain_MouseLeftButtonDown" MouseMove="cmain_MouseMove" MouseLeftButtonUp="cmain_MouseLeftButtonUp" MouseWheel="cmain_MouseWheel" MouseLeave="cmain_MouseLeave">
+                <Canvas Background="Black" Cursor="Cross" Name="cmain" MouseLeftButtonDown="cmain_MouseLeftButtonDown" MouseMove="cmain_MouseMove" MouseLeftButtonUp="cmain_MouseLeftButtonUp" MouseWheel="cmain_MouseWheel" MouseLeave="cmain_MouseLeave" MouseRightButtonUp="cmain_MouseRightButtonUp">
                     
                 </Canvas>
             </Grid>

@@ -31,7 +31,6 @@ namespace WpfApplication11
                 path.Tag = point;
                 path.Data = rect;
                 CMain.Children.Add(path);
-                MyCapture.Points.Add(point);
                 Step = 1;
             }
             else if (Step == 1)
@@ -42,7 +41,6 @@ namespace WpfApplication11
                 MyCapture.Points.Add(rect.BottomRight);
                 MyCapture.Points.Add(rect.TopLeft);
                 MyCapture.Points.Add(rect.TopRight);
-
                 Step = 0;
             }
         }
