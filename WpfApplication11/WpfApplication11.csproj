@@ -78,6 +78,7 @@
     <Compile Include="DrawBase\DrawBase.cs" />
     <Compile Include="DrawBase\DrawCopy.cs" />
     <Compile Include="DrawBase\DrawEllipse.cs" />
+    <Compile Include="DrawBase\DrawFont.cs" />
     <Compile Include="DrawBase\DrawLine.cs" />
     <Compile Include="DrawBase\DrawRectangle.cs" />
     <Compile Include="DrawBase\DrawSelected.cs" />

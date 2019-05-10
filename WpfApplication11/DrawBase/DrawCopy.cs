@@ -45,7 +45,7 @@ namespace WpfApplication11
             }
             else if (Step == 1)
             {
-                if (CMain.Children.Count > 3)
+                if (CMain.Children.Count > CommonParam._defaultCount + 1)
                 {
                     Rect selected = Next(point);
 
@@ -53,7 +53,7 @@ namespace WpfApplication11
                     //MyCapture.Points.Add(rect.BottomRight);
                     //MyCapture.Points.Add(rect.TopLeft);
                     //MyCapture.Points.Add(rect.TopRight);
-                    for (int i = 2; i < CMain.Children.Count - 1; i++)
+                    for (int i = CommonParam._defaultCount; i < CMain.Children.Count - 1; i++)
                     {
                         var temp = CMain.Children[i];
                         Path path = temp as Path;

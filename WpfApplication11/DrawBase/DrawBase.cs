@@ -57,7 +57,7 @@ namespace WpfApplication11
 
         }
 
-        public virtual void SetTranslate(Path path)
+        public virtual void SetTranslate(UIElement path)
         {
             TranslateTransform pathTranslate = MyCapture.GetTranslate();
             ScaleTransform pathScale = MyCapture.GetScale();

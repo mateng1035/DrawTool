@@ -51,7 +51,7 @@
                             </dxb:BarButtonItem>
                             <dxb:BarButtonItem Glyph="Resource/Images/yuanxingweixuanzhong.png" ItemClick="Ellipse_ItemClick">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Glyph="Resource/Images/wenzi.png">
+                            <dxb:BarButtonItem Glyph="Resource/Images/wenzi.png" ItemClick="Font_ItemClick">
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                         <dxr:RibbonPageGroup Caption="复制">

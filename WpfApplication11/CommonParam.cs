@@ -10,5 +10,6 @@ namespace WpfApplication11
     {
         public static bool _isBuzhuo = true;
         public static bool _isZhengjiao = true;
+        public static int _defaultCount = 2;
     }
 }

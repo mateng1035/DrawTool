@@ -32,6 +32,7 @@ namespace WpfApplication11
         {
             AddCapture();
             DrawText(0, 0, "", Colors.White);
+            //DrawEditBox(0, 0, "", false);
             SetControls();
         }
 
@@ -189,10 +190,10 @@ namespace WpfApplication11
                     _drawBase.Step = 0;
                 }
             }
-            while (cmain.Children.Count > 2)
+            while (cmain.Children.Count > CommonParam._defaultCount)
             {
-                //永久保留默认的捕捉点和textblock
-                cmain.Children.RemoveAt(2);
+                //永久保留默认的捕捉点和textblock、textbox
+                cmain.Children.RemoveAt(CommonParam._defaultCount);
             }
             _cap.Points.Clear();
         }
@@ -271,7 +272,11 @@ namespace WpfApplication11
                 {
                     continue;
                 }
-                Path path = item as Path;
+                if (item is TextBox)
+                {
+                    continue;
+                }
+                UIElement path = item as UIElement;
 
                 TransformGroup tfGroup = path.RenderTransform as TransformGroup;
                 if (tfGroup == null)
@@ -313,7 +318,6 @@ namespace WpfApplication11
                 textBlock = new TextBlock();
                 cmain.Children.Add(textBlock);
             }
-
             textBlock.Text = text;
 
             textBlock.Foreground = new SolidColorBrush(color);
@@ -321,6 +325,30 @@ namespace WpfApplication11
             Canvas.SetLeft(textBlock, x);
 
             Canvas.SetTop(textBlock, y);
+        }
+
+        TextBox textBox = null;
+        private void DrawEditBox(double x, double y, string text, bool isShow)
+        {
+            if (textBox == null)
+            {
+                textBox = new TextBox();
+                textBox.Width = 100;
+                textBox.Height = 50;
+            }
+            if (isShow)
+            {
+                textBox.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                textBox.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            textBox.Text = text;
+
+            Canvas.SetLeft(textBox, x);
+
+            Canvas.SetTop(textBox, y);
         }
 
         private void cmain_MouseLeave(object sender, MouseEventArgs e)
@@ -380,6 +408,14 @@ namespace WpfApplication11
             _drawBase.CMain = this.cmain;
             DefaultCursor();
             this.bstatus.Content = "当前工具: 拷贝";
+        }
+
+        private void Font_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            //_drawBase = new DrawFont(_cap);
+            //_drawBase.CMain = this.cmain;
+            //DefaultCursor();
+            //this.bstatus.Content = "当前工具: 文字";
         }
     }
 }
