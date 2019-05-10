@@ -55,13 +55,13 @@
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                         <dxr:RibbonPageGroup Caption="复制">
-                            <dxb:BarButtonItem Glyph="Resource/Images/plus-copy.png">
+                            <dxb:BarButtonItem Glyph="Resource/Images/plus-copy.png" ItemClick="Copy_ItemClick">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Glyph="Resource/Images/jianqie.png">
+                            <!--<dxb:BarButtonItem Glyph="Resource/Images/jianqie.png">
                             </dxb:BarButtonItem>
                             <dxb:BarButtonItem Glyph="Resource/Images/zhantie.png">
-                            </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Content="删除" Glyph="Resource/Images/shanchu.png" ItemClick="Delete_ItemClick">
+                            </dxb:BarButtonItem>-->
+                            <dxb:BarButtonItem Glyph="Resource/Images/shanchu.png" ItemClick="Delete_ItemClick">
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
@@ -86,8 +86,8 @@
                     <dxb:BarStaticItem x:Name="btran" ShowBorder="False" />
                     <dxb:BarStaticItem x:Name="bscale" ShowBorder="False" />
                     <dxb:BarStaticItem x:Name="btext" ShowBorder="False"/>
-                    <dxb:BarCheckItem Content="捕捉：开"/>
-                    <dxb:BarCheckItem Content="正交：开"/>
+                    <dxb:BarCheckItem Content="捕捉：开" x:Name="bbz" ItemClick="bbz_ItemClick" />
+                    <dxb:BarCheckItem Content="正交：开" x:Name="bzj" ItemClick="bzj_ItemClick"/>
                     
                     <!--<dxb:BarStaticItem Content="Column:" ShowBorder="False"/>
                     <dxb:BarStaticItem Content="1"/>-->

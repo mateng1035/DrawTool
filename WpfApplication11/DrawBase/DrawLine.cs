@@ -34,17 +34,30 @@ namespace WpfApplication11
             }
             else if (Step == 1)
             {
-                Next(point);
-                MyCapture.Points.Add(point);
+                Point p2 = Next(point);
+                MyCapture.Points.Add(p2);
                 Step = 0;
             }
         }
 
-        public void Next(Point p2)
+        public Point Next(Point p2)
         {
             Path path = CMain.Children[CMain.Children.Count - 1] as Path;
             LineGeometry l = path.Data as LineGeometry;
+            if (CommonParam._isZhengjiao)
+            {
+                Point p1 = l.StartPoint;
+                if (Math.Abs(p1.X - p2.X) < Math.Abs(p1.Y - p2.Y))
+                {
+                    p2 = new Point(p1.X, p2.Y);
+                }
+                else
+                {
+                    p2 = new Point(p2.X, p1.Y);
+                }
+            }
             l.EndPoint = p2;
+            return p2;
             //l.EndPoint = e.GetPosition(CMain);
         }
         public override void MouseMove(object sender, Point point)

@@ -31,9 +31,20 @@ namespace WpfApplication11
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             AddCapture();
-            drawText(0, 0, "", Colors.White);
-            //LineGeometry line = new LineGeometry();
+            DrawText(0, 0, "", Colors.White);
+            SetControls();
         }
+
+        private void SetControls()
+        {
+            bbz.IsChecked = true;
+            bzj.IsChecked = false;
+            CommonParam._isBuzhuo = true;
+            CommonParam._isZhengjiao = false;
+            this.bbz.Content = "捕捉：开";
+            this.bzj.Content = "正交：关";
+        }
+
         //捕捉工具
         RectangleGeometry pRect = null;
         Path pPath = null;
@@ -124,18 +135,20 @@ namespace WpfApplication11
             if (_drawBase != null)
             {
                 Point p = GetPoint(e); //e.GetPosition(this.cmain);
-
-                bool isshow = false;
-                p = _cap.Check(p, out isshow);
-                if (!isshow)
+                if (CommonParam._isBuzhuo)
                 {
-                    pPath.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                else
-                {
-                    double length = 10;// 10 / scaleLevel;
-                    pRect.Rect = new Rect(new Point(p.X - length, p.Y - length), new Point(p.X + length, p.Y + length));
-                    pPath.Visibility = System.Windows.Visibility.Visible;
+                    bool isshow = false;
+                    p = _cap.Check(p, out isshow);
+                    if (!isshow)
+                    {
+                        pPath.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        double length = 10;// 10 / scaleLevel;
+                        pRect.Rect = new Rect(new Point(p.X - length, p.Y - length), new Point(p.X + length, p.Y + length));
+                        pPath.Visibility = System.Windows.Visibility.Visible;
+                    }
                 }
 
                 _drawBase.MouseMove(sender, p);
@@ -149,7 +162,7 @@ namespace WpfApplication11
             }
             Point rp = GetPoint(e);
             this.bpoint.Content = string.Format("(x:{0},y:{1})", (long)rp.X, (long)rp.Y);
-            drawText(e.GetPosition(this.cmain).X + 20, e.GetPosition(this.cmain).Y + 20, string.Format("(x:{0},y:{1})", (long)rp.X, (long)rp.Y), Colors.White);
+            DrawText(e.GetPosition(this.cmain).X + 20, e.GetPosition(this.cmain).Y + 20, string.Format("(x:{0},y:{1})", (long)rp.X, (long)rp.Y), Colors.White);
 
             //this.btran.Content = string.Format("(x:{0},y:{1})", (long)_cap.GetTranslate().X, (long)_cap.GetTranslate().Y);
         }
@@ -293,7 +306,7 @@ namespace WpfApplication11
             }
         }
         TextBlock textBlock = null;
-        private void drawText(double x, double y, string text, Color color)
+        private void DrawText(double x, double y, string text, Color color)
         {
             if (textBlock == null)
             {
@@ -331,6 +344,42 @@ namespace WpfApplication11
                 _drawBase.MouseRightButtonUp(sender, e);
                 UnSelected();
             }
+        }
+
+        private void bbz_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            if (bbz.IsChecked == true)
+            {
+                this.bbz.Content = "捕捉：开";
+                CommonParam._isBuzhuo = true;
+            }
+            else
+            {
+                this.bbz.Content = "捕捉：关";
+                CommonParam._isBuzhuo = false;
+            }
+        }
+
+        private void bzj_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            if (bzj.IsChecked == true)
+            {
+                this.bzj.Content = "正交：开";
+                CommonParam._isZhengjiao = true;
+            }
+            else
+            {
+                this.bzj.Content = "正交：关";
+                CommonParam._isZhengjiao = false;
+            }
+        }
+
+        private void Copy_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            _drawBase = new DrawCopy(_cap);
+            _drawBase.CMain = this.cmain;
+            DefaultCursor();
+            this.bstatus.Content = "当前工具: 拷贝";
         }
     }
 }

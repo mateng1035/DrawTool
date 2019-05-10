@@ -74,7 +74,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CommonFun.cs" />
+    <Compile Include="CommonParam.cs" />
     <Compile Include="DrawBase\DrawBase.cs" />
+    <Compile Include="DrawBase\DrawCopy.cs" />
     <Compile Include="DrawBase\DrawEllipse.cs" />
     <Compile Include="DrawBase\DrawLine.cs" />
     <Compile Include="DrawBase\DrawRectangle.cs" />
