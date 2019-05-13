@@ -79,7 +79,7 @@ namespace WpfApplication11
                     {
                         tempTranslate.X = pathTranslate.X;
                         tempTranslate.Y = pathTranslate.Y;
-                        break;
+                        //break;
                     }
                     ScaleTransform tempScale = item as ScaleTransform;
                     if (tempScale != null)

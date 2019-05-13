@@ -45,9 +45,13 @@ namespace WpfApplication11
                 {
                     if (item is TextBlock)
                     {
-                        continue;
+                        TextBlock tb = item as TextBlock;
+                        if (tb.Tag != null && tb.Tag.ToString() == "sp_bz")
+                        {
+                            continue;
+                        }
                     }
-                    Path path = item as Path;
+                    UIElement path = item as UIElement;
 
                     TransformGroup tfGroup = path.RenderTransform as TransformGroup;
                     if (tfGroup == null)

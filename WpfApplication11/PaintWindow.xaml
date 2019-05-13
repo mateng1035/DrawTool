@@ -78,7 +78,7 @@
                     </dxr:RibbonPage>
                 </dxr:RibbonDefaultPageCategory>
             </dxr:RibbonControl>
-            <dxr:RibbonStatusBarControl DockPanel.Dock="Bottom">
+            <dxr:RibbonStatusBarControl DockPanel.Dock="Bottom" IsSizeGripVisible="True">
                 <dxr:RibbonStatusBarControl.LeftItems>
                     <!--<dxb:BarStaticItem Content="Row:" ShowBorder="False"/>-->
                     <dxb:BarStaticItem Content="当前工具: 无" x:Name="bstatus"/>

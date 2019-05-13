@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="WpfApplication11.UCTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="200" Background="White" Cursor="Arrow">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="20,24,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="157" x:Name="Edit"/>
+        <Button Content="确定" Style="{StaticResource btnCommon}" HorizontalAlignment="Left" Margin="102,59,10,15" VerticalAlignment="Top" Width="75" Click="Edited_Click">
+        </Button>
+
+    </Grid>
+</UserControl>

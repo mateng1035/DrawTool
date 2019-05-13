@@ -56,45 +56,48 @@ namespace WpfApplication11
                     for (int i = CommonParam._defaultCount; i < CMain.Children.Count - 1; i++)
                     {
                         var temp = CMain.Children[i];
-                        Path path = temp as Path;
-                        path.Stroke = Brushes.White;
-                        if (path != null)
+                        if (temp is Path)
                         {
-                            if (path.Data is LineGeometry)
+                            Path path = temp as Path;
+                            path.Stroke = Brushes.White;
+                            if (path != null)
                             {
-                                LineGeometry line = path.Data as LineGeometry;
-                                bool p1 = CommonFun.IsPointIn(selected, line.StartPoint);
-                                bool p2 = CommonFun.IsPointIn(selected, line.EndPoint);
-                                if (p1 && p2)
+                                if (path.Data is LineGeometry)
                                 {
-                                    path.Stroke = Brushes.LightBlue;
-                                    selectedPathes.Add(path);
+                                    LineGeometry line = path.Data as LineGeometry;
+                                    bool p1 = CommonFun.IsPointIn(selected, line.StartPoint);
+                                    bool p2 = CommonFun.IsPointIn(selected, line.EndPoint);
+                                    if (p1 && p2)
+                                    {
+                                        path.Stroke = Brushes.LightBlue;
+                                        selectedPathes.Add(path);
+                                    }
                                 }
-                            }
-                            else if (path.Data is RectangleGeometry)
-                            {
-                                RectangleGeometry rect = path.Data as RectangleGeometry;
-                                bool p1 = CommonFun.IsPointIn(selected, rect.Rect.BottomLeft);
-                                bool p2 = CommonFun.IsPointIn(selected, rect.Rect.BottomRight);
-                                bool p3 = CommonFun.IsPointIn(selected, rect.Rect.TopLeft);
-                                bool p4 = CommonFun.IsPointIn(selected, rect.Rect.TopRight);
-                                if (p1 && p2 && p3 && p4)
+                                else if (path.Data is RectangleGeometry)
                                 {
-                                    path.Stroke = Brushes.LightBlue;
-                                    selectedPathes.Add(path);
+                                    RectangleGeometry rect = path.Data as RectangleGeometry;
+                                    bool p1 = CommonFun.IsPointIn(selected, rect.Rect.BottomLeft);
+                                    bool p2 = CommonFun.IsPointIn(selected, rect.Rect.BottomRight);
+                                    bool p3 = CommonFun.IsPointIn(selected, rect.Rect.TopLeft);
+                                    bool p4 = CommonFun.IsPointIn(selected, rect.Rect.TopRight);
+                                    if (p1 && p2 && p3 && p4)
+                                    {
+                                        path.Stroke = Brushes.LightBlue;
+                                        selectedPathes.Add(path);
+                                    }
                                 }
-                            }
-                            else if (path.Data is EllipseGeometry)
-                            {
-                                EllipseGeometry ellipse = path.Data as EllipseGeometry;
-                                bool p1 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X - ellipse.RadiusX, ellipse.Center.Y));
-                                bool p2 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X + ellipse.RadiusX, ellipse.Center.Y));
-                                bool p3 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
-                                bool p4 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
-                                if (p1 && p2 && p3 && p4)
+                                else if (path.Data is EllipseGeometry)
                                 {
-                                    path.Stroke = Brushes.LightBlue;
-                                    selectedPathes.Add(path);
+                                    EllipseGeometry ellipse = path.Data as EllipseGeometry;
+                                    bool p1 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X - ellipse.RadiusX, ellipse.Center.Y));
+                                    bool p2 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X + ellipse.RadiusX, ellipse.Center.Y));
+                                    bool p3 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
+                                    bool p4 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
+                                    if (p1 && p2 && p3 && p4)
+                                    {
+                                        path.Stroke = Brushes.LightBlue;
+                                        selectedPathes.Add(path);
+                                    }
                                 }
                             }
                         }
@@ -155,6 +158,7 @@ namespace WpfApplication11
                 topleft.Y = p2.Y;
                 bottomright.Y = p1.Y;
             }
+
 
             rect.Rect = new Rect(topleft, bottomright);
 

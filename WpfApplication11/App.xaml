@@ -4,7 +4,11 @@
              StartupUri="PaintWindow.xaml">
     <Application.Resources>
 
-        <Image x:Key="ImageSource1" Source="Resource/Images/line.png" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource/MyButton.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

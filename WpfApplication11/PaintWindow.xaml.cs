@@ -32,7 +32,7 @@ namespace WpfApplication11
         {
             AddCapture();
             DrawText(0, 0, "", Colors.White);
-            //DrawEditBox(0, 0, "", false);
+            DrawEditBox(0, 0, "", false);
             SetControls();
         }
 
@@ -107,6 +107,10 @@ namespace WpfApplication11
             {
                 Point p = GetPoint(e); //e.GetPosition(this.cmain);
                 p = _cap.Check(p);
+                if (_drawBase is DrawFont)
+                {
+                    DrawEditBox(p.X, p.Y, "", true);
+                }
                 _drawBase.MouseLeftButtonDown(sender, p);
             }
             else
@@ -270,9 +274,14 @@ namespace WpfApplication11
                 var item = cmain.Children[i];
                 if (item is TextBlock)
                 {
-                    continue;
+                    TextBlock tb = item as TextBlock;
+                    if (tb.Tag != null && tb.Tag.ToString() == "sp_bz")
+                    {
+                        continue;
+                    }
+                    //continue;
                 }
-                if (item is TextBox)
+                if (item is UCTextBox)
                 {
                     continue;
                 }
@@ -295,8 +304,16 @@ namespace WpfApplication11
                         {
                             scaleTemp.ScaleX = scaleLevel;
                             scaleTemp.ScaleY = scaleLevel;
+                            //if (path is TextBlock)
+                            //{
+                            //    scaleTemp.CenterX = e.GetPosition(this.cmain).X;
+                            //    scaleTemp.CenterY = e.GetPosition(this.cmain).Y;
+                            //}
+                            //else
+                            //{
                             scaleTemp.CenterX = scaleCenter.X;
                             scaleTemp.CenterY = scaleCenter.Y;
+                            //}
                             break;
                         }
                     }
@@ -316,6 +333,7 @@ namespace WpfApplication11
             if (textBlock == null)
             {
                 textBlock = new TextBlock();
+                textBlock.Tag = "sp_bz";
                 cmain.Children.Add(textBlock);
             }
             textBlock.Text = text;
@@ -327,28 +345,49 @@ namespace WpfApplication11
             Canvas.SetTop(textBlock, y);
         }
 
-        TextBox textBox = null;
+        UCTextBox textBox = null;
         private void DrawEditBox(double x, double y, string text, bool isShow)
         {
             if (textBox == null)
             {
-                textBox = new TextBox();
-                textBox.Width = 100;
-                textBox.Height = 50;
+                textBox = new UCTextBox();
+                cmain.Children.Add(textBox);
+                textBox.Edited = UCTextBox_Edited;
             }
             if (isShow)
             {
                 textBox.Visibility = System.Windows.Visibility.Visible;
+                textBox.Edit.Focus();
             }
             else
             {
                 textBox.Visibility = System.Windows.Visibility.Collapsed;
             }
-            textBox.Text = text;
+            textBox.Edit.Text = text;
+            textBox.X = x;
+            textBox.Y = y;
 
-            Canvas.SetLeft(textBox, x);
+            Canvas.SetLeft(textBox, x + 10);
 
-            Canvas.SetTop(textBox, y);
+            Canvas.SetTop(textBox, y + 10);
+        }
+
+        public void UCTextBox_Edited(object sender, EventArgs e)
+        {
+            UCTextBox tcEdit = sender as UCTextBox;
+            if (_drawBase is DrawFont)
+            {
+                DrawFont df = _drawBase as DrawFont;
+                df.AddFont(tcEdit);
+            }
+            //TextBlock tbAdd = new TextBlock();
+            //tbAdd.Text = tcEdit.Edit.Text;
+            //tbAdd.Foreground = new SolidColorBrush(Colors.White);
+            //Canvas.SetLeft(tbAdd, tcEdit.X);
+            //Canvas.SetTop(tbAdd, tcEdit.Y);
+
+            //tcEdit.Visibility = System.Windows.Visibility.Collapsed;
+            //this.cmain.Children.Add(tbAdd);
         }
 
         private void cmain_MouseLeave(object sender, MouseEventArgs e)
@@ -412,10 +451,10 @@ namespace WpfApplication11
 
         private void Font_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-            //_drawBase = new DrawFont(_cap);
-            //_drawBase.CMain = this.cmain;
-            //DefaultCursor();
-            //this.bstatus.Content = "当前工具: 文字";
+            _drawBase = new DrawFont(_cap);
+            _drawBase.CMain = this.cmain;
+            DefaultCursor();
+            this.bstatus.Content = "当前工具: 文字";
         }
     }
 }

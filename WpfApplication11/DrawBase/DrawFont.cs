@@ -33,5 +33,19 @@ namespace WpfApplication11
             CMain.Children.Add(block);
         }
 
+        public void AddFont(UCTextBox tcEdit)
+        {
+            TextBlock tbAdd = new TextBlock();
+            tbAdd.Text = tcEdit.Edit.Text;
+            tbAdd.Foreground = new SolidColorBrush(Colors.White);
+            Canvas.SetLeft(tbAdd, tcEdit.X);
+            Canvas.SetTop(tbAdd, tcEdit.Y);
+
+            tcEdit.Visibility = System.Windows.Visibility.Collapsed;
+
+            SetTranslate(tbAdd);
+
+            CMain.Children.Add(tbAdd);
+        }
     }
 }

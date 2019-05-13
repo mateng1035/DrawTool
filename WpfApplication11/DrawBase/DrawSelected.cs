@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -54,46 +55,62 @@ namespace WpfApplication11
                     for (int i = CommonParam._defaultCount; i < CMain.Children.Count - 1; i++)
                     {
                         var temp = CMain.Children[i];
-                        Path path = temp as Path;
-                        path.Stroke = Brushes.White;
-                        if (path != null)
+                        if (temp is Path)
                         {
-                            if (path.Data is LineGeometry)
+                            Path path = temp as Path;
+                            path.Stroke = Brushes.White;
+                            if (path != null)
                             {
-                                LineGeometry line = path.Data as LineGeometry;
-                                bool p1 = CommonFun.IsPointIn(selected, line.StartPoint);
-                                bool p2 = CommonFun.IsPointIn(selected, line.EndPoint);
-                                if (p1 && p2)
+                                if (path.Data is LineGeometry)
                                 {
-                                    path.Stroke = Brushes.LightBlue;
-                                    selectedPathes.Add(path);
+                                    LineGeometry line = path.Data as LineGeometry;
+                                    bool p1 = CommonFun.IsPointIn(selected, line.StartPoint);
+                                    bool p2 = CommonFun.IsPointIn(selected, line.EndPoint);
+                                    if (p1 && p2)
+                                    {
+                                        path.Stroke = Brushes.LightBlue;
+                                        selectedPathes.Add(path);
+                                    }
+                                }
+                                else if (path.Data is RectangleGeometry)
+                                {
+                                    RectangleGeometry rect = path.Data as RectangleGeometry;
+                                    bool p1 = CommonFun.IsPointIn(selected, rect.Rect.BottomLeft);
+                                    bool p2 = CommonFun.IsPointIn(selected, rect.Rect.BottomRight);
+                                    bool p3 = CommonFun.IsPointIn(selected, rect.Rect.TopLeft);
+                                    bool p4 = CommonFun.IsPointIn(selected, rect.Rect.TopRight);
+                                    if (p1 && p2 && p3 && p4)
+                                    {
+                                        path.Stroke = Brushes.LightBlue;
+                                        selectedPathes.Add(path);
+                                    }
+                                }
+                                else if (path.Data is EllipseGeometry)
+                                {
+                                    EllipseGeometry ellipse = path.Data as EllipseGeometry;
+                                    bool p1 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X - ellipse.RadiusX, ellipse.Center.Y));
+                                    bool p2 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X + ellipse.RadiusX, ellipse.Center.Y));
+                                    bool p3 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
+                                    bool p4 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
+                                    if (p1 && p2 && p3 && p4)
+                                    {
+                                        path.Stroke = Brushes.LightBlue;
+                                        selectedPathes.Add(path);
+                                    }
                                 }
                             }
-                            else if (path.Data is RectangleGeometry)
+                        }
+                        else if (temp is TextBlock)
+                        {
+                            TextBlock edit = temp as TextBlock;
+                            double x = Canvas.GetLeft(edit);
+                            double y = Canvas.GetTop(edit);
+                            bool p1 = CommonFun.IsPointIn(selected, new Point(x, y));
+                            bool p2 = CommonFun.IsPointIn(selected, new Point(x + edit.ActualWidth, y + edit.ActualHeight));
+                            if (p1 && p2)
                             {
-                                RectangleGeometry rect = path.Data as RectangleGeometry;
-                                bool p1 = CommonFun.IsPointIn(selected, rect.Rect.BottomLeft);
-                                bool p2 = CommonFun.IsPointIn(selected, rect.Rect.BottomRight);
-                                bool p3 = CommonFun.IsPointIn(selected, rect.Rect.TopLeft);
-                                bool p4 = CommonFun.IsPointIn(selected, rect.Rect.TopRight);
-                                if (p1 && p2 && p3 && p4)
-                                {
-                                    path.Stroke = Brushes.LightBlue;
-                                    selectedPathes.Add(path);
-                                }
-                            }
-                            else if (path.Data is EllipseGeometry)
-                            {
-                                EllipseGeometry ellipse = path.Data as EllipseGeometry;
-                                bool p1 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X - ellipse.RadiusX, ellipse.Center.Y));
-                                bool p2 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X + ellipse.RadiusX, ellipse.Center.Y));
-                                bool p3 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
-                                bool p4 = CommonFun.IsPointIn(selected, new Point(ellipse.Center.X, ellipse.Center.Y + ellipse.RadiusY));
-                                if (p1 && p2 && p3 && p4)
-                                {
-                                    path.Stroke = Brushes.LightBlue;
-                                    selectedPathes.Add(path);
-                                }
+                                edit.Foreground = Brushes.LightBlue;
+                                selectedPathes.Add(edit);
                             }
                         }
                     }
@@ -116,7 +133,7 @@ namespace WpfApplication11
                 Step = 3;
             }
         }
-        List<Path> selectedPathes = new List<Path>();
+        List<UIElement> selectedPathes = new List<UIElement>();
         Point pm1 = new Point();
 
         private Rect Next(Point p2)
@@ -171,10 +188,11 @@ namespace WpfApplication11
                 double mx = (pm2.X - pm1.X);
                 double my = (pm2.Y - pm1.Y);
 
-                foreach (Path path in selectedPathes)
+                foreach (UIElement UI in selectedPathes)
                 {
-                    if (path != null)
+                    if (UI is Path)
                     {
+                        Path path = UI as Path;
                         if (path.Data is LineGeometry)
                         {
                             LineGeometry line = path.Data as LineGeometry;
@@ -207,6 +225,13 @@ namespace WpfApplication11
                             MyCapture.Points.Add(ellipse.Center);
                         }
                     }
+                    else if (UI is TextBlock)
+                    {
+                        TextBlock edit = UI as TextBlock;
+                        
+                        Canvas.SetLeft(edit, Canvas.GetLeft(edit) + mx);
+                        Canvas.SetTop(edit, Canvas.GetTop(edit) + my);
+                    }
                 }
                 pm1 = pm2;
             }
@@ -225,9 +250,16 @@ namespace WpfApplication11
             if (Step == 2)
             {
                 Step = 0;
-                foreach (Path item in selectedPathes)
+                foreach (UIElement item in selectedPathes)
                 {
-                    item.Stroke = Brushes.White;
+                    if (item is Path)
+                    {
+                        ((Path)item).Stroke = Brushes.White;
+                    }
+                    if (item is TextBlock)
+                    {
+                        ((TextBlock)item).Foreground = Brushes.White;
+                    }
                 }
                 selectedPathes.Clear();
             }

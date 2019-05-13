@@ -59,5 +59,23 @@ namespace WpfApplication11.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 绘图工具 的本地化字符串。
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前工具：无 的本地化字符串。
+        /// </summary>
+        internal static string ToolStatus {
+            get {
+                return ResourceManager.GetString("ToolStatus", resourceCulture);
+            }
+        }
     }
 }
