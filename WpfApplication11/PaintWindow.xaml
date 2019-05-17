@@ -25,9 +25,9 @@
                 <dxr:RibbonDefaultPageCategory>
                     <dxr:RibbonPage Caption="主页">
                         <dxr:RibbonPageGroup Caption="文件">
-                            <dxb:BarButtonItem Glyph="{dx:DXImage Image=Open_16x16.png}" LargeGlyph="{dx:DXImage Image=Open_32x32.png}"/>
-                            <dxb:BarButtonItem Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}"/>
-                            <dxb:BarButtonItem Glyph="{dx:DXImage Image=Save_16x16.png}" LargeGlyph="{dx:DXImage Image=Save_32x32.png}"/>
+                            <dxb:BarButtonItem ToolTip="打开" Glyph="{dx:DXImage Image=Open_16x16.png}" LargeGlyph="{dx:DXImage Image=Open_32x32.png}"/>
+                            <dxb:BarButtonItem ToolTip="新建" Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}"/>
+                            <dxb:BarButtonItem ToolTip="保存" Glyph="{dx:DXImage Image=Save_16x16.png}" LargeGlyph="{dx:DXImage Image=Save_32x32.png}"/>
                         </dxr:RibbonPageGroup>
                         <!--<dxr:RibbonPageGroup Caption="Ribbon Page Group">
                             <dxb:BarButtonItem Content="Cut" Glyph="{dx:DXImage Image=Cut_16x16.png}" LargeGlyph="{dx:DXImage Image=Cut_32x32.png}"/>
@@ -37,42 +37,54 @@
                     </dxr:RibbonPage>
                     <dxr:RibbonPage Caption="绘制">
                         <dxr:RibbonPageGroup Caption="普通">
-                            <dxb:BarButtonItem Glyph="Resource/Images/fuwei.png" ItemClick="Reset_ItemClick">
+                            <dxb:BarButtonItem ToolTip="复位" Glyph="Resource/Images/fuwei.png" ItemClick="Reset_ItemClick">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Glyph="Resource/Images/tuodong.png" ItemClick="Drag_ItemClick">
+                            <dxb:BarButtonItem ToolTip="平移" Glyph="Resource/Images/tuodong.png" ItemClick="Drag_ItemClick">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Glyph="Resource/Images/yidong.png" ItemClick="Move_ItemClick">
+                            <dxb:BarButtonItem ToolTip="移动" Glyph="Resource/Images/yidong.png" ItemClick="Move_ItemClick">
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                         <dxr:RibbonPageGroup Caption="绘制">
-                            <dxb:BarButtonItem Glyph="Resource/Images/line.png" ItemClick="Line_ItemClick">
+                            <dxb:BarButtonItem ToolTip="直线" Glyph="Resource/Images/line.png" ItemClick="Line_ItemClick">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Glyph="Resource/Images/juxing.png" ItemClick="Rectangle_ItemClick">
+                            <dxb:BarButtonItem ToolTip="矩形" Glyph="Resource/Images/juxing.png" ItemClick="Rectangle_ItemClick">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Glyph="Resource/Images/yuanxingweixuanzhong.png" ItemClick="Ellipse_ItemClick">
+                            <dxb:BarButtonItem ToolTip="圆形" Glyph="Resource/Images/yuanxingweixuanzhong.png" ItemClick="Ellipse_ItemClick">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem Glyph="Resource/Images/wenzi.png" ItemClick="Font_ItemClick">
+                            <dxb:BarButtonItem ToolTip="文字" Glyph="Resource/Images/wenzi.png" ItemClick="Font_ItemClick">
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                         <dxr:RibbonPageGroup Caption="复制">
-                            <dxb:BarButtonItem Glyph="Resource/Images/plus-copy.png" ItemClick="Copy_ItemClick">
+                            <dxb:BarButtonItem ToolTip="复制" Glyph="Resource/Images/plus-copy.png" ItemClick="Copy_ItemClick">
                             </dxb:BarButtonItem>
                             <!--<dxb:BarButtonItem Glyph="Resource/Images/jianqie.png">
                             </dxb:BarButtonItem>
                             <dxb:BarButtonItem Glyph="Resource/Images/zhantie.png">
                             </dxb:BarButtonItem>-->
-                            <dxb:BarButtonItem Glyph="Resource/Images/shanchu.png" ItemClick="Delete_ItemClick">
+                            <dxb:BarButtonItem ToolTip="删除" Glyph="Resource/Images/dangeshanc.png">
+                            </dxb:BarButtonItem>
+                            <dxb:BarButtonItem ToolTip="清除" Glyph="Resource/Images/shanchu.png" ItemClick="Clear_ItemClick">
+                            </dxb:BarButtonItem>
+                            <dxb:BarButtonItem ToolTip="组合" Glyph="Resource/Images/zuhe.png" ItemClick="Group_ItemClick">
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
-                    <dxr:RibbonPage Caption="帮助">
+                    <dxr:RibbonPage Caption="选项">
                         <!--<dxr:RibbonPageGroup Caption="Text Alignment">
                             <dxb:BarCheckItem x:Name="biLeft" Glyph="{dx:DXImage Image=AlignLeft_16x16.png}" GroupIndex="1" IsChecked="True"/>
                             <dxb:BarCheckItem x:Name="biCenter" Glyph="{dx:DXImage Image=AlignCenter_16x16.png}" GroupIndex="1"/>
                             <dxb:BarCheckItem x:Name="biRight" Glyph="{dx:DXImage Image=AlignRight_16x16.png}" GroupIndex="1"/>
                         </dxr:RibbonPageGroup>-->
+                        <dxr:RibbonPageGroup Caption="导出">
+                            <dxb:BarButtonItem ToolTip="导出SVG"  Glyph="Resource/Images/daochu.png">
+                            </dxb:BarButtonItem>
+                        </dxr:RibbonPageGroup>
                         <dxr:RibbonPageGroup Caption="打印">
-                            <dxb:BarButtonItem Glyph="{dx:DXImage Image=Print_16x16.png}" LargeGlyph="{dx:DXImage Image=Print_32x32.png}">
+                            <dxb:BarButtonItem ToolTip="打印" Glyph="{dx:DXImage Image=Print_16x16.png}" LargeGlyph="{dx:DXImage Image=Print_32x32.png}">
+                            </dxb:BarButtonItem>
+                            <dxb:BarButtonItem ToolTip="设置" Glyph="Resource/Images/shezhi.png">
+                            </dxb:BarButtonItem>
+                            <dxb:BarButtonItem ToolTip="关于" Glyph="Resource/Images/guanyu.png" ItemClick="BarButtonItem_ItemClick">
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>

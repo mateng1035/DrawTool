@@ -80,6 +80,7 @@
     <Compile Include="DrawBase\DrawCopy.cs" />
     <Compile Include="DrawBase\DrawEllipse.cs" />
     <Compile Include="DrawBase\DrawFont.cs" />
+    <Compile Include="DrawBase\DrawGroup.cs" />
     <Compile Include="DrawBase\DrawLine.cs" />
     <Compile Include="DrawBase\DrawRectangle.cs" />
     <Compile Include="DrawBase\DrawSelected.cs" />
@@ -152,6 +153,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\Images\guanyu.png" />
+    <Resource Include="Resource\Images\daochu.png" />
+    <Resource Include="Resource\Images\dangeshanc.png" />
+    <Resource Include="Resource\Images\shezhi.png" />
+    <Resource Include="Resource\Images\zuhe.png" />
     <Resource Include="Resource\Images\yidong.png" />
     <Resource Include="Resource\Images\tuodong.png" />
     <Resource Include="Resource\Images\fuwei.png" />

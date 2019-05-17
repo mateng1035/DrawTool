@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DevExpress.Xpf.Bars;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -174,6 +176,7 @@ namespace WpfApplication11
 
         private void Reset_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
+            BarButtonItem bbi = sender as BarButtonItem;
             this.bstatus.Content = "当前工具: 无";
             if (_drawBase != null)
             {
@@ -185,7 +188,7 @@ namespace WpfApplication11
             }
             DefaultCursor();
         }
-        private void Delete_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        private void Clear_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
             if (_drawBase != null)
             {
@@ -455,6 +458,29 @@ namespace WpfApplication11
             _drawBase.CMain = this.cmain;
             DefaultCursor();
             this.bstatus.Content = "当前工具: 文字";
+        }
+
+        private void Group_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+            _drawBase = new DrawGroup(_cap);
+            _drawBase.CMain = this.cmain;
+            DefaultCursor();
+            this.bstatus.Content = "当前工具: 组合";
+        }
+
+        private void BarButtonItem_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            string t = "{\"title\":\"测试数据\",\"url\":\"http://vod.htysx.com.cn/efdafe4389764a35ad19308aa6dff68c/0842c0709db341a8a661dd5700132628-7beceed664e50ff43206b1fdf6a73fbd-od-S00000001-200000.mp4\",\"link\":\"http://www.htyfw.com.cn/demand/toVodInfo?courseId=177\",\"type\":\"D\"}";
+            string app = AppDomain.CurrentDomain.BaseDirectory + "video\\ZHCWVideo.exe";
+            //System.Diagnostics.Process.Start(app, t);
+
+            string argument1 = "\"" + t + "\"";
+            Process process = new Process();
+            process.StartInfo.FileName = app;
+            process.StartInfo.Arguments = "测试数据 http://vod.htysx.com.cn/efdafe4389764a35ad19308aa6dff68c/0842c0709db341a8a661dd5700132628-7beceed664e50ff43206b1fdf6a73fbd-od-S00000001-200000.mp4 http://www.htyfw.com.cn/demand/toVodInfo?courseId=177 D";
+            process.StartInfo.UseShellExecute = true;
+            //启动  
+            process.Start();
         }
     }
 }
