@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Xml;
 
 namespace WpfApplication11
 {
     public class SVGBase
     {
+        private string _xmlInnerText;
+        /// <summary>
+        /// xml原内容
+        /// </summary>
+        public string XmlInnerText
+        {
+            get { return _xmlInnerText; }
+            set { _xmlInnerText = value; }
+        }
+
         private string _style;
         /// <summary>
         /// 样式
@@ -27,6 +40,20 @@ namespace WpfApplication11
             get { return _attrs; }
             set { _attrs = value; }
         }
-
+        /// <summary>
+        /// 获取svg字符串内容
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetSVGToString();
+        /// <summary>
+        /// 获取svg xml内容
+        /// </summary>
+        /// <returns></returns>
+        public abstract XmlNode GetSVGToXml();
+        /// <summary>
+        /// 获取Geometry
+        /// </summary>
+        /// <returns></returns>
+        public abstract Geometry GetGeometry(XmlNode node);
     }
 }

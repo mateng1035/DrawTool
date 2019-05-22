@@ -26,13 +26,15 @@ namespace WpfApplication11
         {
             InitializeComponent();
         }
-        public PaintWindow(string filename)
+        List<SVGBase> _svgList;
+        public PaintWindow(string filename, List<SVGBase> svgList)
         {
             InitializeComponent();
             if (!string.IsNullOrEmpty(filename))
             {
                 this.Title = filename;
                 _filename = filename;
+                _svgList = svgList;
             }
         }
 
@@ -47,6 +49,41 @@ namespace WpfApplication11
             DrawText(0, 0, "", Colors.White);
             DrawEditBox(0, 0, "", false);
             SetControls();
+
+            if (_svgList != null && _svgList.Count > 0)
+            {
+                foreach (var item in _svgList)
+                {
+                    Path path = new Path();
+                    path.StrokeThickness = 1;
+                    path.Stroke = Brushes.White;
+                    if (item is SVGRectangle)
+                    {
+                        SVGRectangle rect = item as SVGRectangle;
+                        RectangleGeometry r = new RectangleGeometry();
+                        r.Rect = new Rect(rect.Point1, rect.Point2);
+                        path.Data = r;
+                    }
+                    else if (item is SVGLine)
+                    {
+                        SVGLine line = item as SVGLine;
+                        LineGeometry l = new LineGeometry();
+                        l.StartPoint = line.StartPoint;
+                        l.EndPoint = line.EndPoint;
+                        path.Data = l;
+                    }
+                    else if (item is SVGEllipse)
+                    {
+                        SVGEllipse ellipse = item as SVGEllipse;
+                        EllipseGeometry el = new EllipseGeometry();
+                        el.Center = ellipse.Center;
+                        el.RadiusX = ellipse.RadiusX;
+                        el.RadiusY = ellipse.RadiusY;
+                        path.Data = el;
+                    }
+                    cmain.Children.Add(path);
+                }
+            }
         }
 
         private void SetControls()
