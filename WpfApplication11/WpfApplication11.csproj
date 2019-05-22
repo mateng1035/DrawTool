@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>WpfApplication11.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Images.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
@@ -86,6 +92,10 @@
     <Compile Include="DrawBase\DrawSelected.cs" />
     <Compile Include="imagemodel.cs" />
     <Compile Include="MyCapture.cs" />
+    <Compile Include="SVGBase.cs" />
+    <Compile Include="SVGModel\SVGEllipse.cs" />
+    <Compile Include="SVGModel\SVGLine.cs" />
+    <Compile Include="SVGModel\SVGRectangle.cs" />
     <Compile Include="TranslateEvent.cs" />
     <Compile Include="PaintWindow.xaml.cs">
       <DependentUpon>PaintWindow.xaml</DependentUpon>
@@ -153,6 +163,8 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\Images\logo.ico" />
+    <Resource Include="Resource\Images\logo.png" />
     <Resource Include="Resource\Images\guanyu.png" />
     <Resource Include="Resource\Images\daochu.png" />
     <Resource Include="Resource\Images\dangeshanc.png" />
@@ -173,6 +185,7 @@
     <Resource Include="Resource\Images\yuanjiao.png" />
     <Resource Include="Resource\Images\yuanjiaofangkuang.png" />
     <Resource Include="Resource\Images\yuanxingweixuanzhong.png" />
+    <Resource Include="logo.ico" />
     <Content Include="Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,10 +43,12 @@ namespace WpfApplication11
             FieldInfo[] fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
             foreach (FieldInfo field in fields)
             {
-                try { 
-                    field.SetValue(retval, DeepCopy(field.GetValue(obj))); 
+                try
+                {
+                    field.SetValue(retval, DeepCopy(field.GetValue(obj)));
                 }
-                catch {
+                catch
+                {
                 }
             }
             return (T)retval;
@@ -72,6 +75,36 @@ namespace WpfApplication11
                 stream.Seek(0, SeekOrigin.Begin);
                 return (T)formatter.Deserialize(stream);
             }
+        }
+
+        /// <summary>
+        /// 设置文件关联
+        /// </summary>
+        /// <param name="p_Filename">程序的名称</param>
+        /// <param name="p_FileTypeName">扩展名 .VRD </param>
+        public static void SaveReg(string p_Filename, string p_FileTypeName)
+        {
+            RegistryKey _RegKey = Registry.ClassesRoot.OpenSubKey("", true); //打开注册表
+
+            RegistryKey _VRPkey = _RegKey.OpenSubKey(p_FileTypeName);
+            if (_VRPkey != null) _RegKey.DeleteSubKey(p_FileTypeName, true);
+            _RegKey.CreateSubKey(p_FileTypeName);
+            _VRPkey = _RegKey.OpenSubKey(p_FileTypeName, true);
+            _VRPkey.SetValue("", "Exec");
+
+            _VRPkey = _RegKey.OpenSubKey("Exec", true);
+            if (_VRPkey != null) _RegKey.DeleteSubKeyTree("Exec"); //如果等于空 就删除注册表DSKJIVR
+
+            _RegKey.CreateSubKey("Exec");
+            _VRPkey = _RegKey.OpenSubKey("Exec", true);
+            _VRPkey.CreateSubKey("shell");
+            _VRPkey = _VRPkey.OpenSubKey("shell", true); //写入必须路径
+            _VRPkey.CreateSubKey("open");
+            _VRPkey = _VRPkey.OpenSubKey("open", true);
+            _VRPkey.CreateSubKey("command");
+            _VRPkey = _VRPkey.OpenSubKey("command", true);
+            string _PathString = "\"" + p_Filename + "\" \"%1\"";
+            _VRPkey.SetValue("", _PathString); //写入数据
         }
     }
 }

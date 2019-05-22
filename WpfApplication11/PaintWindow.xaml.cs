@@ -1,4 +1,5 @@
 ﻿using DevExpress.Xpf.Bars;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,10 +26,20 @@ namespace WpfApplication11
         {
             InitializeComponent();
         }
+        public PaintWindow(string filename)
+        {
+            InitializeComponent();
+            if (!string.IsNullOrEmpty(filename))
+            {
+                this.Title = filename;
+                _filename = filename;
+            }
+        }
 
         DrawBase _drawBase = null;
         MyCapture _cap = new MyCapture();
         TranslateEvent _slate = new TranslateEvent();
+        string _filename;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -468,7 +479,7 @@ namespace WpfApplication11
             this.bstatus.Content = "当前工具: 组合";
         }
 
-        private void BarButtonItem_ItemClick(object sender, ItemClickEventArgs e)
+        private void TestVideo_ItemClick(object sender, ItemClickEventArgs e)
         {
             string t = "{\"title\":\"测试数据\",\"url\":\"http://vod.htysx.com.cn/efdafe4389764a35ad19308aa6dff68c/0842c0709db341a8a661dd5700132628-7beceed664e50ff43206b1fdf6a73fbd-od-S00000001-200000.mp4\",\"link\":\"http://www.htyfw.com.cn/demand/toVodInfo?courseId=177\",\"type\":\"D\"}";
             string app = AppDomain.CurrentDomain.BaseDirectory + "video\\ZHCWVideo.exe";
@@ -481,6 +492,40 @@ namespace WpfApplication11
             process.StartInfo.UseShellExecute = true;
             //启动  
             process.Start();
+        }
+
+        private void Open_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Multiselect = false;
+            ofd.Title = "请选择svg文件";
+
+            ofd.Filter = "svg文件(*.msvg)|*.msvg|svg文件(*.svg)|*.svg|所有文件(*.*)|*.*";
+            if (ofd.ShowDialog() == true)
+            {
+                string file = ofd.FileName;
+                this.Title = file;
+                _filename = file;
+            }
+        }
+
+        private void Save_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (string.IsNullOrEmpty(_filename))
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Title = " 保存";
+                sfd.Filter = "svg文件(*.msvg,*.svg)|*.msvg;*.svg";
+                if (sfd.ShowDialog() == true)
+                {
+
+                }
+            }
+        }
+
+        private void New_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _filename = "";
         }
     }
 }

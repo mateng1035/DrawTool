@@ -1,7 +1,11 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" x:Class="WpfApplication11.PaintWindow"
+        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+        x:Class="WpfApplication11.PaintWindow"
+        Icon="Resource\Images\logo.png"
         Title="SVG绘图工具" Height="500" Width="800" Loaded="Window_Loaded">
     <Grid>
 
@@ -25,9 +29,9 @@
                 <dxr:RibbonDefaultPageCategory>
                     <dxr:RibbonPage Caption="主页">
                         <dxr:RibbonPageGroup Caption="文件">
-                            <dxb:BarButtonItem ToolTip="打开" Glyph="{dx:DXImage Image=Open_16x16.png}" LargeGlyph="{dx:DXImage Image=Open_32x32.png}"/>
-                            <dxb:BarButtonItem ToolTip="新建" Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}"/>
-                            <dxb:BarButtonItem ToolTip="保存" Glyph="{dx:DXImage Image=Save_16x16.png}" LargeGlyph="{dx:DXImage Image=Save_32x32.png}"/>
+                            <dxb:BarButtonItem ToolTip="打开" Glyph="{dx:DXImage Image=Open_16x16.png}" LargeGlyph="{dx:DXImage Image=Open_32x32.png}" ItemClick="Open_ItemClick"/>
+                            <dxb:BarButtonItem ToolTip="新建" Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}" ItemClick="New_ItemClick"/>
+                            <dxb:BarButtonItem ToolTip="保存" Glyph="{dx:DXImage Image=Save_16x16.png}" LargeGlyph="{dx:DXImage Image=Save_32x32.png}" ItemClick="Save_ItemClick"/>
                         </dxr:RibbonPageGroup>
                         <!--<dxr:RibbonPageGroup Caption="Ribbon Page Group">
                             <dxb:BarButtonItem Content="Cut" Glyph="{dx:DXImage Image=Cut_16x16.png}" LargeGlyph="{dx:DXImage Image=Cut_32x32.png}"/>
@@ -84,7 +88,7 @@
                             </dxb:BarButtonItem>
                             <dxb:BarButtonItem ToolTip="设置" Glyph="Resource/Images/shezhi.png">
                             </dxb:BarButtonItem>
-                            <dxb:BarButtonItem ToolTip="关于" Glyph="Resource/Images/guanyu.png" ItemClick="BarButtonItem_ItemClick">
+                            <dxb:BarButtonItem ToolTip="关于" Glyph="Resource/Images/guanyu.png" ItemClick="TestVideo_ItemClick">
                             </dxb:BarButtonItem>
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
@@ -100,7 +104,7 @@
                     <dxb:BarStaticItem x:Name="btext" ShowBorder="False"/>
                     <dxb:BarCheckItem Content="捕捉：开" x:Name="bbz" ItemClick="bbz_ItemClick" />
                     <dxb:BarCheckItem Content="正交：开" x:Name="bzj" ItemClick="bzj_ItemClick"/>
-                    
+
                     <!--<dxb:BarStaticItem Content="Column:" ShowBorder="False"/>
                     <dxb:BarStaticItem Content="1"/>-->
                 </dxr:RibbonStatusBarControl.LeftItems>
@@ -112,7 +116,7 @@
             </dxr:RibbonStatusBarControl>
             <Grid Margin="0,0,0,0" Panel.ZIndex="-1">
                 <Canvas Background="Black" Cursor="Cross" Name="cmain" MouseLeftButtonDown="cmain_MouseLeftButtonDown" MouseMove="cmain_MouseMove" MouseLeftButtonUp="cmain_MouseLeftButtonUp" MouseWheel="cmain_MouseWheel" MouseLeave="cmain_MouseLeave" MouseRightButtonUp="cmain_MouseRightButtonUp">
-                    
+
                 </Canvas>
             </Grid>
         </DockPanel>
